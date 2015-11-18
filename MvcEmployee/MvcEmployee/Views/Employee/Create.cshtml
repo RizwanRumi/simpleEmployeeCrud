@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Create";
+    
+}
+
+<h2>Create</h2>
+
+
+
+<fieldset>
+
+    <div class="editor-field">
+        First Name : 
+        <input type="text" id="firstName" value="" placeholder="Enter First Name" />
+    </div>
+
+    <div class="editor-field">
+        Last Name : 
+        <input type="text" id="lastName" value="" placeholder="Enter Last Name" />
+    </div> 
+    
+    <div class="editor-field">
+        Email: 
+        <input type="email" id="email" value="" placeholder="Enter Email Address" />
+    </div>
+  
+      <div class="editor-field">
+            Gender : 
+          <form id="gender">
+              Male <input id="gender" name="gender" type="radio" value="Male" />
+              <input id="gender" name="gender" type="radio" value="Female" /> Female
+          </form>
+   </div>
+
+    <div class="editor-field">
+        <img id="imageView" src="#" width="100" height="100" />
+        
+        <p>
+            Upload Image : <input type="file" id="imageFile" name="imageFile" />
+        </p>
+    </div>
+
+    <div class="editor-field">
+        <input type="submit" value="Create" id="btnCreate" />
+    </div>
+
+
+</fieldset>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script src="~/Scripts/EmployeeAdd.js"></script>
+}

@@ -1,0 +1,91 @@
+﻿@model MvcEmployee.Models.Employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Employee</legend>
+    
+    <input type="hidden" id="employeeId" value="@Model.EmployeeId" />
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        <input type="hidden" id="firstName" value="@Model.FirstName" />
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Gender)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagePath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagePath)
+    </div>
+</fieldset>
+
+    <p>
+        <input type="submit" id="btnDelete" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#btnDelete").click(function (e) {
+            e.preventDefault();
+            $("#btnDelete").prop('disabled', true);
+
+            var employeeId = $("#employeeId").val();
+            var firstName = $("#firstName").val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'Delete',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: employeeId, name: firstName }),
+                success: function (result) {
+                    if (result.valid) {
+                        alert(result.message);
+                        $("#btnDelete").prop('disabled', false);
+                        return true;
+                    } else {
+                        alert(result.message);
+                        $("#btnDelete").prop('disabled', false);
+                        return true;
+                    }
+                },
+                error: function() {
+                    alert("Critical Error!. Failed to call the server.");
+                    return false;
+                }
+            });
+        });
+    </script>
+}
